@@ -10,7 +10,7 @@ import (
 func main() {
     port := os.Getenv("PORT")
     if port == "" {
-        port = "8080"
+        port = "443"
     }
 
     fmt.Fprintf(os.Stdout, "Listening on :%s\n", port)
@@ -21,6 +21,6 @@ func main() {
     })
 
 
-    log.Fatal(http.ListenAndServe(":" + port, nil))
+    log.Fatal(http.ListenAndServeTLS(":" + port,"/run/secrets/server.cert","/run/secrets/server.key", nil))
 }
 
